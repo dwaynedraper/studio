@@ -3,10 +3,6 @@ import { Playfair_Display, Montserrat } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import { Providers } from './providers';
-import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
-import HubReturnToast from '@/components/HubReturnToast';
-import { Suspense } from 'react';
 
 const PLAUSIBLE_SCRIPT = process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT;
 const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
@@ -27,6 +23,13 @@ const montserrat = Montserrat({
 });
 
 const SITE_URL = 'https://sharpsighted.studio';
+
+/**
+ * Root layout. Stays minimal so /studio (Sanity Studio mount) can render
+ * full-bleed without inheriting Nav/Footer/HubReturnToast. The public
+ * site chrome lives in src/app/(site)/layout.tsx, which wraps everything
+ * inside the (site) route group.
+ */
 
 export const metadata: Metadata = {
   title: {
@@ -106,19 +109,7 @@ export default function RootLayout({
         )}
       </head>
       <body className="min-h-screen flex flex-col font-sans">
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
-        <Providers>
-          <Nav />
-          <main id="main-content" className="flex-1 pt-14">
-            {children}
-          </main>
-          <Footer activeSite="studio" />
-          <Suspense fallback={null}>
-            <HubReturnToast />
-          </Suspense>
-        </Providers>
+        <Providers>{children}</Providers>
         <SpeedInsights />
       </body>
     </html>
