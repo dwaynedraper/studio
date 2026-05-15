@@ -1,10 +1,11 @@
+import Link from 'next/link';
+import { DISCORD_INVITE_URL, TAGLINE } from '@/lib/branding';
+
 /**
- * Homepage placeholder — will be assembled into the full 7-block layout in
- * step 10 of the build order (after series, journal, reactions, 10% archive,
- * and the social feed are all in place).
- *
- * For step 1, this lives only to verify the scaffold renders the nav, footer,
- * fonts, typography rhythm, and Studio's terracotta dialect.
+ * Homepage placeholder — assembled into the full 7-block layout in step
+ * 10 (after series, journal, reactions, 10% archive, and the social
+ * feed are all in place). For now: hero + two CTAs + tagline, just
+ * enough to verify the chrome.
  */
 
 export default function Home() {
@@ -29,21 +30,21 @@ export default function Home() {
         back, and the conversation that happens around all of it.
       </p>
       <div className="mt-10 flex flex-wrap gap-4">
-        <a className="btn-primary" href="/join">
+        <a className="btn-primary" href={DISCORD_INVITE_URL} rel="noopener noreferrer">
           Join the Discord →
         </a>
-        <a className="btn-outline" href="/journal">
+        <Link className="btn-outline" href="/journal">
           Read the journal →
-        </a>
+        </Link>
       </div>
 
       <hr className="shine-line mt-20" />
 
       <p
-        className="mt-10 text-xs tracking-[0.14em] uppercase text-center"
+        className="mt-10 text-xs tracking-[0.22em] uppercase text-center"
         style={{ color: 'var(--text-muted)' }}
       >
-        Stay Sharp. Stay Seen. Stay Human.
+        {TAGLINE}
       </p>
     </div>
   );

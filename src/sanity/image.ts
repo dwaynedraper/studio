@@ -1,7 +1,7 @@
-import imageUrlBuilder, { type SanityImageSource } from '@sanity/image-url';
+import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url';
 import { dataset, projectId } from './env';
 
-const builder = imageUrlBuilder({ projectId, dataset });
+const builder = createImageUrlBuilder({ projectId, dataset });
 
 /**
  * Returns an image URL builder for a Sanity image reference. Usage:

@@ -23,5 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     })),
+    { url: `${BASE}/journal`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
+    /* Individual /journal/[slug] entries get added by step 11, when
+       the sitemap learns to enumerate Sanity content at build time. */
   ];
 }

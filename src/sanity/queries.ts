@@ -131,6 +131,22 @@ export const journalIndexQuery = defineQuery(`
     }
 `);
 
+/* Unified, filterable variant used by /journal. Each filter is
+   optional — when its parameter is absent, `defined()` short-circuits
+   the clause. Reduces three named queries into one and lets the page
+   combine filters (e.g. ?series=bartographer&tag=printing). */
+export const journalIndexFilteredQuery = defineQuery(`
+  *[_type == "journalPost" && status == "published"
+    && (!defined($author) || author->handle.current == $author)
+    && (!defined($series) || series->slug.current == $series)
+    && (!defined($tag) || $tag in tags)
+  ]
+    | order(publishedAt desc)
+    [$start...$end]{
+      ${POST_CARD}
+    }
+`);
+
 export const journalIndexCountQuery = defineQuery(`
   count(*[_type == "journalPost" && status == "published"])
 `);
