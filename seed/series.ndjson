@@ -1,0 +1,6 @@
+{"_id":"series-bartographer","_type":"series","title":"Bartographer","slug":{"_type":"slug","current":"bartographer"},"tagline":"","badge":"magnet","pillar":"human","order":10}
+{"_id":"series-special-moments","_type":"series","title":"Special Moments","slug":{"_type":"slug","current":"special-moments"},"tagline":"","badge":"funnel","pillar":"seen","order":20}
+{"_id":"series-corridor","_type":"series","title":"Corridor","slug":{"_type":"slug","current":"corridor"},"tagline":"","badge":"authority","pillar":"sharp","order":30}
+{"_id":"series-home-architecture","_type":"series","title":"Home Architecture","slug":{"_type":"slug","current":"home-architecture"},"tagline":"","badge":"authority","pillar":"sharp","order":40}
+{"_id":"series-alpha-architect","_type":"series","title":"Alpha Architect","slug":{"_type":"slug","current":"alpha-architect"},"tagline":"","badge":"authority","pillar":"sharp","order":50}
+{"_id":"series-ripped-or-stamped","_type":"series","title":"Ripped or Stamped","slug":{"_type":"slug","current":"ripped-or-stamped"},"tagline":"A radical reality series about photography and fine art printing.","badge":"flagship","pillar":"human","order":60}

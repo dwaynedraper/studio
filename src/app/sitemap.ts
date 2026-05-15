@@ -1,18 +1,27 @@
 import type { MetadataRoute } from 'next';
+import { SERIES_SEEDS } from '@/lib/series-seeds';
 
 const BASE = 'https://sharpsighted.studio';
 
 /**
  * Sitemap. Lists only routes that currently exist and respond with
  * 2xx — entries for unshipped routes get re-added by the step that
- * ships them. Once Sanity content lands (step 5+), this file will
- * also enumerate /journal/* , /series/* , and /10-percent archive
- * entries by querying Sanity at build time.
+ * ships them. Step 11 (SEO) will swap the seed-based series listing
+ * here for a Sanity-driven enumeration so the sitemap reflects the
+ * actual published catalog.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
   return [
-    { url: BASE, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
-    { url: `${BASE}/about`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/join`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: BASE, lastModified: now, changeFrequency: 'weekly', priority: 1 },
+    { url: `${BASE}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/join`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/series`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    ...SERIES_SEEDS.map((s) => ({
+      url: `${BASE}/series/${s.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    })),
   ];
 }

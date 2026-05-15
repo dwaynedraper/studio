@@ -78,6 +78,10 @@ export const seriesListQuery = defineQuery(`
   }
 `);
 
+export const seriesSlugsQuery = defineQuery(`
+  *[_type == "series" && defined(slug.current)][].slug.current
+`);
+
 export const seriesBySlugQuery = defineQuery(`
   *[_type == "series" && slug.current == $slug][0]{
     _id,
