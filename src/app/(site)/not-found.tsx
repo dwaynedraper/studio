@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { PROPERTIES, TAGLINE } from '@/lib/branding';
 
 export const metadata = {
   title: 'Page not found',
@@ -25,38 +26,40 @@ export default function NotFound() {
         we haven&rsquo;t built yet. Pick a door below.
       </p>
 
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
-        <PropertyCard
-          label="Studio"
-          tagline="Community, journal, the 10%"
-          href="/"
-          isActive
-        />
-        <PropertyCard
-          label="Hub"
-          tagline="sharpsightedstudio.com"
-          href="https://sharpsightedstudio.com"
-          external
-        />
-        <PropertyCard
-          label="Photos"
-          tagline="sharpsighted.photos · Portraits & headshots"
-          href="https://sharpsighted.photos"
-          external
-        />
-        <PropertyCard
-          label="Media"
-          tagline="sharpsighted.media · Real estate"
-          href="https://sharpsighted.media"
-          external
-        />
+      {/* Interior routes — most 404s land here looking for content */}
+      <div className="mt-10 flex flex-wrap gap-3">
+        <Link href="/" className="btn-primary">Studio home →</Link>
+        <Link href="/journal" className="btn-outline">Journal →</Link>
+        <Link href="/series" className="btn-ghost">Series →</Link>
+        <Link href="/10-percent" className="btn-ghost">10% →</Link>
+      </div>
+
+      {/* The four Sharp Sighted properties */}
+      <p
+        className="mt-16 mb-6 text-xs tracking-[0.22em] uppercase"
+        style={{ color: 'var(--accent)' }}
+      >
+        Or try another door
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
+        {PROPERTIES.map((p) => (
+          <PropertyCard
+            key={p.id}
+            label={p.label}
+            domain={p.domain}
+            identity={p.identity}
+            href={p.href}
+            pillarHex={p.pillarHex}
+            isActive={p.id === 'studio'}
+          />
+        ))}
       </div>
 
       <p
-        className="mt-16 text-xs tracking-[0.14em] uppercase text-center"
+        className="mt-16 text-xs tracking-[0.22em] uppercase text-center"
         style={{ color: 'var(--text-muted)' }}
       >
-        Stay Sharp. Stay Seen. Stay Human.
+        {TAGLINE}
       </p>
     </div>
   );
@@ -64,50 +67,57 @@ export default function NotFound() {
 
 function PropertyCard({
   label,
-  tagline,
+  domain,
+  identity,
   href,
-  external,
+  pillarHex,
   isActive,
 }: {
   label: string;
-  tagline: string;
+  domain: string;
+  identity: string;
   href: string;
-  external?: boolean;
-  isActive?: boolean;
+  pillarHex: string;
+  isActive: boolean;
 }) {
-  const className = 'surface-card block transition-colors duration-200 hover:border-(--border-accent)';
+  const className =
+    'surface-card block transition-colors duration-200 hover:border-(--border-accent)';
+
   const content = (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-2">
         <span
-          className="font-serif text-2xl"
-          style={{ color: isActive ? 'var(--accent)' : 'var(--text)' }}
+          className="text-xs tracking-[0.22em] uppercase"
+          style={{ color: pillarHex }}
         >
-          {label}
+          {label} {isActive && '· you are here'}
         </span>
-        <span
-          aria-hidden="true"
-          style={{ color: 'var(--text-muted)' }}
-        >
-          {external ? '↗' : '→'}
-        </span>
+        {!isActive && (
+          <span aria-hidden="true" style={{ color: 'var(--text-muted)' }}>↗</span>
+        )}
       </div>
-      <p className="mt-2 text-sm" style={{ color: 'var(--text-mid)' }}>
-        {tagline}
+      <p
+        className="font-serif italic text-lg leading-snug"
+        style={{ color: 'var(--text)' }}
+      >
+        {identity}
+      </p>
+      <p className="mt-1 text-xs" style={{ color: 'var(--text-muted)' }}>
+        {domain}
       </p>
     </>
   );
 
-  if (external) {
+  if (isActive) {
     return (
-      <a href={href} className={className} rel="noopener noreferrer">
+      <Link href="/" className={className}>
         {content}
-      </a>
+      </Link>
     );
   }
   return (
-    <Link href={href} className={className}>
+    <a href={href} className={className} rel="noopener noreferrer">
       {content}
-    </Link>
+    </a>
   );
 }
