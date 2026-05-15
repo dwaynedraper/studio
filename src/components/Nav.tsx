@@ -37,6 +37,13 @@ export default function Nav() {
 
       <div className="flex items-center gap-5">
         <Link
+          href="/about"
+          className="text-xs tracking-[0.12em] uppercase hidden sm:inline-block transition-colors duration-200"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          About
+        </Link>
+        <Link
           href="/journal"
           className="text-xs tracking-[0.12em] uppercase hidden sm:inline-block transition-colors duration-200"
           style={{ color: 'var(--text-muted)' }}

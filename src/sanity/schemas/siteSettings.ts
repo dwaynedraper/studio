@@ -69,14 +69,6 @@ export const siteSettings = defineType({
         }),
       ],
     }),
-    defineField({
-      name: 'tagline',
-      title: 'Tagline (locked)',
-      type: 'string',
-      readOnly: true,
-      initialValue: 'Stay Sharp. Stay Seen. Stay Human.',
-      description: 'The brand tagline. Closes every page. Not editable.',
-    }),
   ],
   preview: {
     prepare() {

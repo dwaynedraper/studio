@@ -18,7 +18,6 @@ export const siteSettingsQuery = defineQuery(`
     discordInviteUrl,
     defaultDiscussChannelUrl,
     officialAccounts,
-    tagline,
   }
 `);
 
