@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import type { PortableTextBlock } from '@portabletext/react';
 import { sanityFetch } from '@/sanity/client';
@@ -13,7 +12,7 @@ import { JournalCard } from '@/components/JournalCard';
 import { ReactionsBlock } from '@/components/ReactionsBlock';
 import { DiscordCTA } from '@/components/DiscordCTA';
 import { getReactionState } from '@/lib/reactions-server';
-import { getCurrentUser } from '@/lib/auth-helpers';
+import { resolveReactionIdentity } from '@/lib/reaction-identity';
 import { TAGLINE } from '@/lib/branding';
 
 export const dynamic = 'force-dynamic';
@@ -117,17 +116,9 @@ export default async function JournalPostPage({
   if (!post) notFound();
 
   /* Resolve the visitor's reaction identity. Signed-in user wins; an
-     anon visitor's cookie (set by /api/react in step 7) is used as a
-     fallback. If neither is present, no "mine" markers render. */
-  const user = await getCurrentUser();
-  const cookieStore = await cookies();
-  const cookieId = cookieStore.get('ss_reaction_id')?.value;
-  const identity = user
-    ? ({ kind: 'user', userId: user.id } as const)
-    : cookieId
-      ? ({ kind: 'cookie', cookieId } as const)
-      : ({ kind: 'none' } as const);
-
+     anon visitor's signed cookie (HMAC verified) comes next; otherwise
+     none. The /api/react POST issues the cookie on first reaction. */
+  const identity = await resolveReactionIdentity();
   const { counts, mine } = await getReactionState(post.slug, identity);
 
   const built = urlFor(post.coverImage);
