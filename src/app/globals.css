@@ -1,0 +1,346 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────
+   Sharp Sighted Studio — globals.css
+   Implements design-language.md §9.5 Studio's dialect:
+   - 10px corner radius default (softer than the editorial 0px of the
+     other Sharp Sighted sites)
+   - Terracotta #A0462A as the load-bearing surface color, not just an
+     accent
+   - 6rem / 8rem section padding (more generous than other sites)
+   - Same Playfair Display + Montserrat type pairing as the hub
+   ───────────────────────────────────────────────────────────────────── */
+
+@theme inline {
+  /* Fonts */
+  --font-sans: var(--font-montserrat);
+  --font-serif: var(--font-playfair);
+
+  /* Brand cyan — identical on every site, used for the footer brand line
+     and any explicit umbrella reference. Studio's day-to-day accent is
+     terracotta, not cyan. */
+  --color-brand-cyan: #38bdf8;
+
+  /* Cream / charcoal base palette, shared with the rest of the brand */
+  --color-charcoal-950: #0c0c0b;
+  --color-charcoal-900: #111110;
+  --color-charcoal-800: #1a1917;
+  --color-charcoal-700: #242320;
+  --color-charcoal-600: #2e2d29;
+  --color-charcoal-500: #3a3935;
+
+  --color-cream-50:  #faf5ec;
+  --color-cream-100: #f4ecdb;
+  --color-cream-200: #ede2c9;
+  --color-cream-300: #e3d5b3;
+  --color-cream-400: #cfbe9a;
+
+  /* Terracotta — the Human pillar / Studio accent. Heavier presence here
+     than on any other Sharp Sighted property. */
+  --color-rust:        #a0462a;
+  --color-rust-light:  #c25f3e;
+  --color-rust-dim:    rgba(160, 70, 42, 0.08);
+  --color-rust-deep:   #6e2f1b;
+
+  /* Shared cyan ladder for the footer wordmark */
+  --color-cyan-400:    #38bdf8;
+  --color-cyan-500:    #0ea5e9;
+}
+
+/* Dark mode strategy using .dark class */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Theme tokens: dark (default) ─────────────────────────────────────── */
+:root {
+  --bg:             #111110;
+  --surface:        #1a1917;
+  --surface-2:      #242320;
+
+  /* Studio dialect: terracotta-tinted surfaces. Used for hero blocks,
+     featured cards, badges. */
+  --surface-warm:   rgba(160, 70, 42, 0.10);
+  --surface-warm-2: rgba(160, 70, 42, 0.18);
+
+  --text:           #faf5ec;
+  --text-mid:       #b5ad9f;
+  --text-muted:     #7a746c;
+
+  --accent:         #c25f3e;       /* terracotta on dark, slightly brightened for contrast */
+  --accent-light:   #d77956;
+  --accent-deep:    #a0462a;
+  --accent-dim:     rgba(194, 95, 62, 0.14);
+
+  --border:         rgba(255, 255, 255, 0.08);
+  --border-accent:  rgba(194, 95, 62, 0.30);
+
+  --nav-bg:         rgba(17, 17, 16, 0.88);
+  --brand-cyan:     #38bdf8;
+
+  /* Studio-only: shape + spacing tokens */
+  --radius-sm:      6px;
+  --radius:         10px;
+  --radius-lg:      14px;
+
+  --section-py:        6rem;       /* mobile */
+  --section-py-lg:     8rem;       /* desktop */
+}
+
+/* ─── Theme tokens: light ───────────────────────────────────────────────── */
+.light {
+  --bg:             #faf5ec;
+  --surface:        #f4ecdb;
+  --surface-2:      #ede2c9;
+
+  --surface-warm:   rgba(160, 70, 42, 0.07);
+  --surface-warm-2: rgba(160, 70, 42, 0.14);
+
+  --text:           #1a1917;
+  --text-mid:       #58534c;
+  --text-muted:     #8a8580;
+
+  --accent:         #a0462a;       /* full-strength terracotta on cream */
+  --accent-light:   #c25f3e;
+  --accent-deep:    #6e2f1b;
+  --accent-dim:     rgba(160, 70, 42, 0.10);
+
+  --border:         rgba(0, 0, 0, 0.09);
+  --border-accent:  rgba(160, 70, 42, 0.28);
+
+  --nav-bg:         rgba(250, 245, 236, 0.92);
+  --brand-cyan:     #38bdf8;
+}
+
+/* ─── Base styles ─────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-montserrat), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body,
+  nav,
+  footer {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), serif;
+}
+
+/* ─── Eyebrow label ───────────────────────────────────────────────────── */
+.eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+/* ─── Shine divider ───────────────────────────────────────────────────── */
+.shine-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.45;
+  border: none;
+}
+
+/* ─── Section rhythm (Studio dialect: 6rem / 8rem) ─────────────────────── */
+.section {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-top: var(--section-py-lg);
+    padding-bottom: var(--section-py-lg);
+  }
+}
+
+/* ─── Card / surface — Studio's soft 10px corners ──────────────────────── */
+.surface-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .surface-card {
+    padding: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .surface-card {
+    padding: 2.5rem;
+  }
+}
+
+.surface-warm {
+  background: var(--surface-warm);
+  border-radius: var(--radius);
+}
+
+/* ─── Buttons (Studio dialect — softer corners) ────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  background: var(--accent);
+  color: #faf5ec;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  background: transparent;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: var(--accent-dim);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-mid);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+/* ─── Skip link ───────────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: #faf5ec;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  transition: top 0.15s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ─── Focus rings (terracotta on Studio) ──────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Reveal animation ────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Container ───────────────────────────────────────────────────────── */
+.container-narrow {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-narrow {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-narrow {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
