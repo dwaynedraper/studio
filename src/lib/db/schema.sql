@@ -64,7 +64,7 @@ CREATE INDEX IF NOT EXISTS reactions_post_idx ON reactions(post_slug);
 CREATE TABLE IF NOT EXISTS social_feed_items (
   id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   platform      TEXT NOT NULL
-                  CHECK (platform IN ('youtube', 'instagram', 'tiktok', 'linkedin')),
+                  CHECK (platform IN ('youtube', 'instagram', 'facebook', 'linkedin')),
   author_handle TEXT NOT NULL,
   published_at  TIMESTAMPTZ NOT NULL,
   thumbnail_url TEXT,

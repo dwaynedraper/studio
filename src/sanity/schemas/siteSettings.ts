@@ -58,9 +58,9 @@ export const siteSettings = defineType({
           type: 'string',
         }),
         defineField({
-          name: 'tiktokHandle',
-          title: 'TikTok @handle',
-          type: 'string',
+          name: 'facebookPageUrl',
+          title: 'Facebook page URL',
+          type: 'url',
         }),
         defineField({
           name: 'linkedinPageUrl',

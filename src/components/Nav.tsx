@@ -58,6 +58,14 @@ export default function Nav() {
           Series
         </Link>
         <Link
+          href="/ripped-or-stamped"
+          className="text-xs tracking-[0.12em] uppercase hidden md:inline-block transition-colors duration-200"
+          style={{ color: 'var(--text-muted)' }}
+          aria-label="Ripped or Stamped"
+        >
+          RoS
+        </Link>
+        <Link
           href="/feed"
           className="text-xs tracking-[0.12em] uppercase hidden md:inline-block transition-colors duration-200"
           style={{ color: 'var(--text-muted)' }}
