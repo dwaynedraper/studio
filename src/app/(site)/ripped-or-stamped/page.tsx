@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { DISCORD_INVITE_URL, TAGLINE } from '@/lib/branding';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/ripped-or-stamped' },
   title: 'Ripped or Stamped',
   description:
     'A status update on Ripped or Stamped: The Architect’s Journey — the radical-reality series following Dean Draper from working photographer to fine art printer.',

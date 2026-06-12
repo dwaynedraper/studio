@@ -45,7 +45,6 @@ export const metadata: Metadata = {
     images: ['/opengraph-image.png'],
   },
   twitter: { card: 'summary_large_image' },
-  alternates: { canonical: SITE_URL },
   robots: { index: true, follow: true },
 };
 

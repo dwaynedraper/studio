@@ -9,6 +9,7 @@ import {
 } from '@/lib/branding';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/about' },
   title: 'About',
   description:
     'Sharp Sighted Studio is the channel — the connective tissue of Sharp Sighted, where the journal, series, the 10% Rule, and the community live.',

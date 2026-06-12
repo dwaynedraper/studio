@@ -90,7 +90,7 @@ export async function generateMetadata({
   const title = fromSanity?.title ?? fromSeed?.title;
   if (!title) return { title: 'Series not found' };
   const description = fromSanity?.tagline || fromSeed?.tagline || `${title} — a Sharp Sighted series.`;
-  return { title, description };
+  return { title, description, alternates: { canonical: `/series/${slug}` } };
 }
 
 export default async function SeriesDetailPage({

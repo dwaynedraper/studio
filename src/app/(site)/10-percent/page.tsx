@@ -11,6 +11,7 @@ import { CONTACT, DISCORD_INVITE_URL, TAGLINE } from '@/lib/branding';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/10-percent' },
   title: 'The 10% Rule',
   description:
     'Ten percent of the work, given. Sharp Sighted Studio’s standing commitment to causes that align with the brand — same craft as is charged elsewhere, given freely to the right missions.',

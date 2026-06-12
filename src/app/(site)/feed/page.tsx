@@ -14,6 +14,7 @@ import type { Platform } from '@/lib/feed/types';
  */
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/feed' },
   title: 'Feed',
   description:
     'Cross-network social timeline from Sharp Sighted and the vetted contributors who run with us.',

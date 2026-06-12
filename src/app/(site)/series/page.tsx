@@ -12,6 +12,7 @@ import { TAGLINE } from '@/lib/branding';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/series' },
   title: 'The Series',
   description:
     'Six ongoing shows from Sharp Sighted Studio. Bartographer, Special Moments, Corridor, Home Architecture, Alpha Architect, and Ripped or Stamped.',

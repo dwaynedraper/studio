@@ -9,6 +9,7 @@ import { TAGLINE } from '@/lib/branding';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/journal' },
   title: 'The Journal',
   description:
     'Multi-author writing from the Sharp Sighted collective — craft, behind-the-scenes, education, and the human side of running a creative practice.',

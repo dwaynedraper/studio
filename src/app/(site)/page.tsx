@@ -19,6 +19,7 @@ import {
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/' },
   title: 'Sharp Sighted Studio — The Channel',
   description:
     'A small collective of photographers, videographers, and the people who care about the craft. The work, the people behind it, the things we give back, and the conversation that happens around all of it.',

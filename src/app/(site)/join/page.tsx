@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { CONTACT, DISCORD_INVITE_URL, TAGLINE } from '@/lib/branding';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/join' },
   title: 'Join',
   description:
     'Join the Sharp Sighted Studio Discord, pitch a journal piece, or learn how the collective works.',
