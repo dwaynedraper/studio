@@ -54,6 +54,12 @@ export default function Footer({ activeSite = 'studio' }: FooterProps) {
           >
             Stay Sharp. Stay Seen. Stay Human.
           </p>
+          <address className="not-italic mt-4 flex flex-col gap-1 text-xs" style={{ color: 'var(--text-muted)' }}>
+            <span style={{ color: 'var(--text)' }}>Sharp Sighted Studio</span>
+            <a href="tel:+12142335338" className="hover:text-(--text) transition-colors duration-200">(214) 233-5338</a>
+            <a href="mailto:dean@sharpsightedstudio.com" className="hover:text-(--text) transition-colors duration-200">dean@sharpsightedstudio.com</a>
+            <span>Serving the DFW 121 corridor &amp; North Texas</span>
+          </address>
         </div>
 
         {/* Property links */}
